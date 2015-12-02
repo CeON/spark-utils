@@ -5,7 +5,6 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.verifyZeroInteractions;
@@ -26,7 +25,6 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import scala.Tuple2;
-import eu.dnetlib.iis.common.avro.Country;
 
 /**
  * 
@@ -118,12 +116,20 @@ public class SparkAvroLoaderTest {
     //------------------------ PRIVATE --------------------------
     
     private void assertMapFunction(Function<Tuple2<AvroKey<Country>, NullWritable>, Country> function) throws Exception {
-        Country country = mock(Country.class);
+        Country country = Country.newBuilder()
+                .setId(3)
+                .setIso("PL")
+                .setName("Poland")
+                .build();
         AvroKey<Country> avroKey = new AvroKey<Country>(country);
         
         Tuple2<AvroKey<Country>, NullWritable> pair = new Tuple2<>(avroKey, NullWritable.get());
         
-        assertTrue(country == function.call(pair));
+        Country retCountry = function.call(pair);
+        
+        assertEquals(Integer.valueOf(3), retCountry.getId());
+        assertEquals("PL", retCountry.getIso());
+        assertEquals("Poland", retCountry.getName());
     }
     
 }

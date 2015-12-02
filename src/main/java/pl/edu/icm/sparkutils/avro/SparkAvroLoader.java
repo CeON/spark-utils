@@ -3,6 +3,7 @@ package pl.edu.icm.sparkutils.avro;
 import java.io.IOException;
 
 import org.apache.avro.Schema;
+import org.apache.avro.generic.GenericRecord;
 import org.apache.avro.mapred.AvroKey;
 import org.apache.avro.mapreduce.AvroJob;
 import org.apache.avro.mapreduce.AvroKeyInputFormat;
@@ -37,7 +38,7 @@ public class SparkAvroLoader {
      * Returns a java rdd filled with records of the specified type (avroRecordClass). The records are read from an avro datastore directory specified by
      * the avroDateStore path 
      */
-    public static <T> JavaRDD<T> loadJavaRDD(JavaSparkContext sc, String avroDatastorePath, Class<T> avroRecordClass) {
+    public static <T extends GenericRecord> JavaRDD<T> loadJavaRDD(JavaSparkContext sc, String avroDatastorePath, Class<T> avroRecordClass) {
         Preconditions.checkNotNull(sc);
         Preconditions.checkNotNull(avroDatastorePath);
         Preconditions.checkNotNull(avroRecordClass);
@@ -49,8 +50,13 @@ public class SparkAvroLoader {
         @SuppressWarnings("unchecked")
         JavaPairRDD<AvroKey<T>, NullWritable> inputRecords = (JavaPairRDD<AvroKey<T>, NullWritable>)
                 sc.newAPIHadoopFile(avroDatastorePath, AvroKeyInputFormat.class, avroRecordClass, NullWritable.class, job.getConfiguration());
+        
+        
 
-        JavaRDD<T> input = inputRecords.map(tuple -> tuple._1.datum());
+        // Hadoop's RecordReader reuses the same Writable object for all records
+        // which may lead to undesired behavior when caching RDD.
+        // Cloning records solves this problem.
+        JavaRDD<T> input = inputRecords.map(tuple -> AvroUtils.cloneAvroRecord(tuple._1.datum()));
 
         return input;
     }
