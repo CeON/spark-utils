@@ -53,6 +53,9 @@ public class SparkAvroLoader {
         
         
 
+        // Hadoop's RecordReader reuses the same Writable object for all records
+        // which may lead to undesired behavior when caching RDD.
+        // Cloning records solves this problem.
         JavaRDD<T> input = inputRecords.map(tuple -> AvroUtils.cloneAvroRecord(tuple._1.datum()));
 
         return input;
