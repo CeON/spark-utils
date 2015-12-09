@@ -164,10 +164,6 @@ public class SparkJob {
                 && Modifier.isStatic(mainMethod.getModifiers()), "the passed class has no main method");
     }
 
-
- 
-   
-    
     
     
 }
