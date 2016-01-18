@@ -6,9 +6,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
 import org.springframework.util.ReflectionUtils;
 
 import com.google.common.base.Preconditions;
@@ -28,7 +29,7 @@ public class SparkJob {
 
     private Map<String, String> jobProperties = new HashMap<>();
     
-    private Map<String, String> mainClassArgs = new HashMap<>();
+    private List<Pair<String, String>> mainClassArgs = new ArrayList<>();
    
     private Class<?> mainClass;
     
@@ -69,7 +70,7 @@ public class SparkJob {
      */
     public String[] getArgs() {
         List<String> arguments = new ArrayList<>();
-        for (Entry<String, String> entry : mainClassArgs.entrySet()) {
+        for (Pair<String, String> entry : mainClassArgs) {
             arguments.add(entry.getKey() + argNameValueSeparator + entry.getValue());
         }
         return arguments.toArray(new String[]{});
@@ -100,7 +101,7 @@ public class SparkJob {
      * Adds an argument that will be passed to the main method of {@link #getMainClass()} during execution.
      */
     public void addArg(String argName, String argValue) {
-        mainClassArgs.put(argName, argValue);
+        mainClassArgs.add(new ImmutablePair<String, String>(argName, argValue));
     }
 
     /**

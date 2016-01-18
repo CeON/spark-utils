@@ -95,13 +95,15 @@ public class SparkJobTest {
         // execute
         
         sparkJob.addArg("argName", "argValue");
+        sparkJob.addArg("argName", "argValueSecond");
         sparkJob.addArg("argName2", "argValue2");
         
         // assert
         
-        assertEquals(2, sparkJob.getArgs().length);
+        assertEquals(3, sparkJob.getArgs().length);
         assertEquals("argName=argValue", sparkJob.getArgs()[0]);
-        assertEquals("argName2=argValue2", sparkJob.getArgs()[1]);
+        assertEquals("argName=argValueSecond", sparkJob.getArgs()[1]);
+        assertEquals("argName2=argValue2", sparkJob.getArgs()[2]);
     }
 
 
