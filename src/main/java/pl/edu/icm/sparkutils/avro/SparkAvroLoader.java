@@ -1,6 +1,7 @@
 package pl.edu.icm.sparkutils.avro;
 
 import java.io.IOException;
+import java.io.Serializable;
 
 import org.apache.avro.Schema;
 import org.apache.avro.generic.GenericRecord;
@@ -22,7 +23,9 @@ import com.google.common.base.Preconditions;
  * @author madryk
  *
  */
-public class SparkAvroLoader {
+public class SparkAvroLoader implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
 
     //------------------------ LOGIC --------------------------

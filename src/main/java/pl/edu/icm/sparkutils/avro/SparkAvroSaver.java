@@ -1,6 +1,7 @@
 package pl.edu.icm.sparkutils.avro;
 
 import java.io.IOException;
+import java.io.Serializable;
 
 import org.apache.avro.Schema;
 import org.apache.avro.mapred.AvroKey;
@@ -25,9 +26,11 @@ import com.google.common.base.Preconditions;
  * @author Łukasz Dumiszewski
  */
 
-public class SparkAvroSaver {
-    
-    
+public class SparkAvroSaver implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+
     //------------------------ LOGIC --------------------------
 
 
