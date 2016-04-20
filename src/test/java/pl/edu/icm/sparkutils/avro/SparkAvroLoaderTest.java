@@ -34,6 +34,8 @@ import scala.Tuple2;
 @RunWith(MockitoJUnitRunner.class)
 public class SparkAvroLoaderTest {
 
+    private SparkAvroLoader sparkAvroLoader = new SparkAvroLoader();
+    
     @Mock
     private JavaSparkContext sparkContext;
     
@@ -65,7 +67,7 @@ public class SparkAvroLoaderTest {
         
         // execute
         
-        JavaRDD<Country> retJavaRDD = SparkAvroLoader.loadJavaRDD(sparkContext, "/avro/datastore", Country.class);
+        JavaRDD<Country> retJavaRDD = sparkAvroLoader.loadJavaRDD(sparkContext, "/avro/datastore", Country.class);
         
         
         // assert
@@ -92,7 +94,7 @@ public class SparkAvroLoaderTest {
     public void loadJavaRDD_NULL_CONTEXT() {
         
         // execute
-        SparkAvroLoader.loadJavaRDD(null, "/avro/datastore", Country.class);
+        sparkAvroLoader.loadJavaRDD(null, "/avro/datastore", Country.class);
         
     }
     
@@ -100,7 +102,7 @@ public class SparkAvroLoaderTest {
     public void loadJavaRDD_NULL_AVRO_PATH() {
         
         // execute
-        SparkAvroLoader.loadJavaRDD(sparkContext, null, Country.class);
+        sparkAvroLoader.loadJavaRDD(sparkContext, null, Country.class);
         
     }
     
@@ -108,7 +110,7 @@ public class SparkAvroLoaderTest {
     public void loadJavaRDD_NULL_AVRO_CLASS() {
         
         // execute
-        SparkAvroLoader.loadJavaRDD(sparkContext, "/avro/datastore", null);
+        sparkAvroLoader.loadJavaRDD(sparkContext, "/avro/datastore", null);
         
     }
     

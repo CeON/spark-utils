@@ -25,20 +25,13 @@ import com.google.common.base.Preconditions;
 public class SparkAvroLoader {
 
 
-    //------------------------ CONSTRUCTORS --------------------------
-
-    private SparkAvroLoader() {
-        throw new IllegalStateException("may not be instantiated");
-    }
-
-
     //------------------------ LOGIC --------------------------
 
     /**
      * Returns a java rdd filled with records of the specified type (avroRecordClass). The records are read from an avro datastore directory specified by
      * the avroDateStore path 
      */
-    public static <T extends GenericRecord> JavaRDD<T> loadJavaRDD(JavaSparkContext sc, String avroDatastorePath, Class<T> avroRecordClass) {
+    public <T extends GenericRecord> JavaRDD<T> loadJavaRDD(JavaSparkContext sc, String avroDatastorePath, Class<T> avroRecordClass) {
         Preconditions.checkNotNull(sc);
         Preconditions.checkNotNull(avroDatastorePath);
         Preconditions.checkNotNull(avroRecordClass);
@@ -64,7 +57,7 @@ public class SparkAvroLoader {
 
     //------------------------ PRIVATE --------------------------
 
-    private static Job getJob(Schema avroSchema) {
+    private Job getJob(Schema avroSchema) {
 
         Job job;
 

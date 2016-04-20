@@ -25,17 +25,7 @@ import com.google.common.base.Preconditions;
  * @author Łukasz Dumiszewski
  */
 
-public final class SparkAvroSaver {
-
-    
-    
-
-    //------------------------ CONSTRUCTORS --------------------------
-    
-    private SparkAvroSaver() {
-        throw new IllegalStateException("may not be instantiated");
-    }
-
+public class SparkAvroSaver {
     
     
     //------------------------ LOGIC --------------------------
@@ -44,7 +34,7 @@ public final class SparkAvroSaver {
     /**
      * Saves the given javaRDD as avro data with the given schema in a directory or file defined by path.  
      */
-    public static <T> void saveJavaRDD(JavaRDD<T> javaRDD, Schema avroSchema, String path) {
+    public <T> void saveJavaRDD(JavaRDD<T> javaRDD, Schema avroSchema, String path) {
         Preconditions.checkNotNull(javaRDD);
         checkSchemaAndPath(avroSchema, path);
         
@@ -58,7 +48,7 @@ public final class SparkAvroSaver {
     /**
      * Saves the keys from the given javaPairRDD as avro data with the given schema in a directory or file defined by path.  
      */
-    public static <K, V> void saveJavaPairKeyRDD(JavaPairRDD<K, V> javaPairRDD, Schema avroSchema, String path) {
+    public <K, V> void saveJavaPairKeyRDD(JavaPairRDD<K, V> javaPairRDD, Schema avroSchema, String path) {
         Preconditions.checkNotNull(javaPairRDD);
         checkSchemaAndPath(avroSchema, path);
         
@@ -73,7 +63,7 @@ public final class SparkAvroSaver {
     
     //------------------------ PRIVATE --------------------------
     
-    private static Job getJob(Schema avroSchema) {
+    private Job getJob(Schema avroSchema) {
         
         Job job;
         
@@ -88,7 +78,7 @@ public final class SparkAvroSaver {
         return job;
     }
     
-    private static void checkSchemaAndPath(Schema avroSchema, String path) {
+    private void checkSchemaAndPath(Schema avroSchema, String path) {
         Preconditions.checkNotNull(avroSchema);
         Preconditions.checkArgument(StringUtils.isNotBlank(path));
     }
