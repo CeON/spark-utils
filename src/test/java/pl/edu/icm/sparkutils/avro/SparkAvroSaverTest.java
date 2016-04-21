@@ -31,18 +31,19 @@ import scala.Tuple2;
 @RunWith(MockitoJUnitRunner.class)
 public class SparkAvroSaverTest {
 
+    private SparkAvroSaver sparkAvroSaver = new SparkAvroSaver();
     
     @Captor
-    ArgumentCaptor<PairFunction<String, AvroKey<String>, NullWritable>> mapToPairFCaptor;
+    private ArgumentCaptor<PairFunction<String, AvroKey<String>, NullWritable>> mapToPairFCaptor;
     
     @Captor
-    ArgumentCaptor<Configuration> capturedConfiguration;
+    private ArgumentCaptor<Configuration> capturedConfiguration;
     
     @Mock
-    JavaRDD<String> javaRDD;
+    private JavaRDD<String> javaRDD;
     
     @Mock
-    JavaPairRDD<String, NullWritable> javaPairRDD;
+    private JavaPairRDD<String, NullWritable> javaPairRDD;
     
     @Mock
     private Schema avroSchema;
@@ -60,7 +61,7 @@ public class SparkAvroSaverTest {
         
         // execute
         
-        SparkAvroSaver.saveJavaRDD(null, avroSchema, path);
+        sparkAvroSaver.saveJavaRDD(null, avroSchema, path);
     }
 
     
@@ -70,7 +71,7 @@ public class SparkAvroSaverTest {
         
         // execute
         
-        SparkAvroSaver.saveJavaPairKeyRDD(javaPairRDD, avroSchema, null);
+        sparkAvroSaver.saveJavaPairKeyRDD(javaPairRDD, avroSchema, null);
     }
     
     
@@ -79,7 +80,7 @@ public class SparkAvroSaverTest {
         
         // execute
         
-        SparkAvroSaver.saveJavaPairKeyRDD(javaPairRDD, null, path);
+        sparkAvroSaver.saveJavaPairKeyRDD(javaPairRDD, null, path);
     }
     
 
@@ -88,7 +89,7 @@ public class SparkAvroSaverTest {
         
         // execute
         
-        SparkAvroSaver.saveJavaPairKeyRDD(null, avroSchema, path);
+        sparkAvroSaver.saveJavaPairKeyRDD(null, avroSchema, path);
     }
     
     
@@ -102,7 +103,7 @@ public class SparkAvroSaverTest {
         
         // execute
         
-        SparkAvroSaver.saveJavaPairKeyRDD(javaPairRDD, avroSchema, path);
+        sparkAvroSaver.saveJavaPairKeyRDD(javaPairRDD, avroSchema, path);
         
         
         // assert
@@ -118,7 +119,7 @@ public class SparkAvroSaverTest {
         
         // execute
         
-        SparkAvroSaver.saveJavaRDD(javaRDD, avroSchema, " ");
+        sparkAvroSaver.saveJavaRDD(javaRDD, avroSchema, " ");
     }
     
     
@@ -127,7 +128,7 @@ public class SparkAvroSaverTest {
         
         // execute
         
-        SparkAvroSaver.saveJavaRDD(javaRDD, null, path);
+        sparkAvroSaver.saveJavaRDD(javaRDD, null, path);
     }
     
 
@@ -136,7 +137,7 @@ public class SparkAvroSaverTest {
         
         // execute
         
-        SparkAvroSaver.saveJavaRDD(null, avroSchema, path);
+        sparkAvroSaver.saveJavaRDD(null, avroSchema, path);
     }
 
     
@@ -151,7 +152,7 @@ public class SparkAvroSaverTest {
         
         // execute
         
-        SparkAvroSaver.saveJavaRDD(javaRDD, avroSchema, path);
+        sparkAvroSaver.saveJavaRDD(javaRDD, avroSchema, path);
         
         
         // assert
