@@ -19,6 +19,17 @@
 		<url>https://github.com/CeON/spark-utils</url>
 	</scm>
 
+        <distributionManagement>
+                <repository>
+                        <id>ceon-commons-releases</id>
+                        <url>http://maven.ceon.pl/artifactory/ceon-commons-releases</url>
+                </repository>
+                <snapshotRepository>
+                        <id>ceon-commons-snapshots</id>
+                        <url>http://maven.ceon.pl/artifactory/ceon-commons-snapshots</url>
+                </snapshotRepository>
+        </distributionManagement>
+
 	<repositories>
 
 		<repository>
