@@ -13,6 +13,12 @@
 		</license>
 	</licenses>
 
+	<scm>
+		<connection>scm:git:ssh://git@github.com/CeON/spark-utils.git</connection>
+		<developerConnection>scm:git:ssh://git@github.com/CeON/spark-utils.git</developerConnection>
+		<url>https://github.com/CeON/spark-utils</url>
+	</scm>
+
 	<repositories>
 
 		<repository>
