@@ -12,11 +12,12 @@ import com.esotericsoftware.kryo.io.Input;
 import com.esotericsoftware.kryo.serializers.CollectionSerializer;
 
 /**
- * Registrator for kryo serializer. It adds support for avro generated classes.
+ * Registrator for kryo serializer. It adds support for avro generated classes. <br/><br/>
+ * Based on the solution provided by Nicolas PHUNG in https://issues.apache.org/jira/browse/SPARK-3601
  * 
  * @author madryk
  * 
- * @see https://issues.apache.org/jira/browse/SPARK-3601
+ * 
  */
 public class AvroCompatibleKryoRegistrator implements KryoRegistrator {
 
@@ -33,8 +34,10 @@ public class AvroCompatibleKryoRegistrator implements KryoRegistrator {
 	 * this type, so we use ArrayLists.
 	 */
 	public static class SpecificInstanceCollectionSerializer<T extends java.util.ArrayList<?>> extends CollectionSerializer implements Serializable {
-		private static final long serialVersionUID = 1L;
-		private Class<T> type;
+		
+	    private static final long serialVersionUID = 1L;
+		
+	    private Class<T> type;
 
 		public SpecificInstanceCollectionSerializer(Class<T> type) {
 			this.type = type;
