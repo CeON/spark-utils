@@ -67,34 +67,34 @@ public class SparkAvroSaverTest {
     
     
     @Test(expected=IllegalArgumentException.class)
-    public void saveJavaPairKeyRDD_EmptyPath() throws Exception {
+    public void saveJavaPairRDDKeys_EmptyPath() throws Exception {
         
         // execute
         
-        sparkAvroSaver.saveJavaPairKeyRDD(javaPairRDD, avroSchema, null);
+        sparkAvroSaver.saveJavaPairRDDKeys(javaPairRDD, avroSchema, null);
     }
     
     
     @Test(expected=NullPointerException.class)
-    public void saveJavaPairRDD_NullSchema() throws Exception {
+    public void saveJavaPairRDDKeys_NullSchema() throws Exception {
         
         // execute
         
-        sparkAvroSaver.saveJavaPairKeyRDD(javaPairRDD, null, path);
+        sparkAvroSaver.saveJavaPairRDDKeys(javaPairRDD, null, path);
     }
     
 
     @Test(expected=NullPointerException.class)
-    public void saveJavaPairKeyRDD_NullJavaRDD() throws Exception {
+    public void saveJavaPairKeyRDDKeys_NullJavaRDD() throws Exception {
         
         // execute
         
-        sparkAvroSaver.saveJavaPairKeyRDD(null, avroSchema, path);
+        sparkAvroSaver.saveJavaPairRDDKeys(null, avroSchema, path);
     }
     
     
     @Test
-    public void saveJavaPairKeyRDD() {
+    public void saveJavaPairKeyRDDKeys() {
         
         // given
         
@@ -103,7 +103,7 @@ public class SparkAvroSaverTest {
         
         // execute
         
-        sparkAvroSaver.saveJavaPairKeyRDD(javaPairRDD, avroSchema, path);
+        sparkAvroSaver.saveJavaPairRDDKeys(javaPairRDD, avroSchema, path);
         
         
         // assert

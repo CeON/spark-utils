@@ -43,7 +43,7 @@ public class SparkAvroSaver implements Serializable {
         
         JavaPairRDD<AvroKey<T>, NullWritable> javaPairRDD = javaRDD.mapToPair(r->new Tuple2<AvroKey<T>, NullWritable>(new AvroKey<T>(r), NullWritable.get()));
         
-        saveJavaPairKeyRDD(javaPairRDD, avroSchema, path);
+        saveJavaPairRDDKeys(javaPairRDD, avroSchema, path);
     
     }
     
@@ -51,7 +51,7 @@ public class SparkAvroSaver implements Serializable {
     /**
      * Saves the keys from the given javaPairRDD as avro data with the given schema in a directory or file defined by path.  
      */
-    public <K, V> void saveJavaPairKeyRDD(JavaPairRDD<K, V> javaPairRDD, Schema avroSchema, String path) {
+    public <K, V> void saveJavaPairRDDKeys(JavaPairRDD<K, V> javaPairRDD, Schema avroSchema, String path) {
         Preconditions.checkNotNull(javaPairRDD);
         checkSchemaAndPath(avroSchema, path);
         
