@@ -11,7 +11,7 @@ The project is written in Java 8.
 ## Testing spark jobs
 To test a spark job written in java (or scala) you have to run a java main class which contains the job definition. Usually you'll want to pass some arguments to it (spark application name, job parameters) to configure the job properly.
 
-*Spark-utils* takes on the burden of the tedious and repetitive work of starting the tested spark job and of passing the parameters to it.
+*Spark-utils* takes on the burden of the tedious and repetitive work of starting the spark job tested and of passing parameters to it.
 
 How can you write a test of a spark job by using *spark-utils*? Just see the example below:
 
@@ -59,6 +59,6 @@ How can you write a test of a spark job by using *spark-utils*? Just see the exa
 
 
 ```
-
+You may also be interested in seeing a real production code that uses *spark-utils* to test spark jobs. Here is an example from [IIS](https://github.com/openaire/iis) project: [AffMatchingJobTest](https://github.com/openaire/iis/blob/cdh5/iis-wf/iis-wf-affmatching/src/test/java/eu/dnetlib/iis/wf/affmatching/AffMatchingJobTest.java)
 
 ## Working with avro files
