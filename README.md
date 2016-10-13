@@ -85,9 +85,23 @@ However, **when using the standard hadoop API in Spark, you can come across unpr
 
 To eliminate this phenomenon, one should clone each avro record after it has been read. This is exactly what the SparkAvroLoader does for you.
 
+In addition, you get a simpler API that is easy to use.
+
 
 
 ### Writing avro files
+To write a spark JavaRDD to avro files, import [SparkAvroSaver](https://github.com/CeON/spark-utils/blob/master/src/main/java/pl/edu/icm/sparkutils/avro/SparkAvroSaver.java) and use its **saveJavaRDD** or **saveJavaPairRDDKeys**, for example:
+
+```java
+import pl.edu.icm.sparkutils.avro.SparkAvroSaver
+
+sparkAvroSaver.saveJavaRDD(javaRDD, avroSchema, outputPath);
+```
+where:
+* *avroSchema* is an avro schema of objects that will be saved
+* *outputPath* points to a place where the avro files will be saved
+
+
 ### Using avro in Kryo
 
 
