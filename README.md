@@ -94,7 +94,7 @@ To write a spark JavaRDD to avro files, import [SparkAvroSaver](https://github.c
 
 ```java
 import pl.edu.icm.sparkutils.avro.SparkAvroSaver
-
+...
 sparkAvroSaver.saveJavaRDD(javaRDD, avroSchema, outputPath);
 ```
 where:
@@ -102,6 +102,18 @@ where:
 * *outputPath* points to a place where the avro files will be saved
 
 
-### Using avro in Kryo
+### Using avro in [Kryo](https://github.com/EsotericSoftware/kryo)
+
+*Spark-utils* makes it easier to use the Kryo serialization by providing a specialized implementation of Kryo registrator. The registrator makes it possible for Kryo to serialize [Avro](https://avro.apache.org) generated classes. Without it Kryo throws an exception while deserializing avro collections (avro uses its own implementation of java.util.List that doesn't have no-argument constructor which is needed by Kryo) (see also: https://issues.apache.org/jira/browse/SPARK-3601).
+
+How to use it:
+```java
+// in spark job:
+...
+SparkConf conf = new SparkConf();
+conf.set("spark.serializer", "org.apache.spark.serializer.KryoSerializer");
+conf.set("spark.kryo.registrator", "pl.edu.icm.sparkutils.avro.AvroCompatibleKryoRegistrator");
+...
+```
 
 
