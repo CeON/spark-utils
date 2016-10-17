@@ -1,5 +1,5 @@
 # spark-utils
-A set of java utilities that facilitate writing [Spark](http://spark.apache.org/) programs in Java.
+A set of utilities that facilitate writing [Spark](http://spark.apache.org/) programs in Java.
 
 At present it simplifies:
 * writing automatic spark job tests,
