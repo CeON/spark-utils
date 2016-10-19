@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>pl.edu.icm.spark-utils</groupId>
 	<artifactId>spark-utils</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1-SNAPSHOT</version>
 
 
 	<licenses>
@@ -16,7 +16,7 @@
 		<connection>scm:git:ssh://git@github.com/CeON/spark-utils.git</connection>
 		<developerConnection>scm:git:ssh://git@github.com/CeON/spark-utils.git</developerConnection>
 		<url>https://github.com/CeON/spark-utils</url>
-	  <tag>v1.0.0</tag>
+	  <tag>HEAD</tag>
   </scm>
 
         <distributionManagement>
