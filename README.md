@@ -7,6 +7,22 @@ At present it simplifies:
 
 The project is written in Java 8.
 
+### How to use it in maven ##
+#### Add [CEON](http://ceon.pl/in-english) maven repository to the "repositories" section of your project's pom or maven settings.xml:
+```xml
+   <repository>
+      <id>ceon-repo</id>
+	  <url>https://maven.ceon.pl/artifactory/repo/</url>
+   </repository>
+```
+#### Add the spark-utils dependency to your project's pom:
+```xml
+   <dependency>
+       <groupId>pl.edu.icm.spark-utils</groupId>
+       <artifactId>spark-utils</artifactId>
+       <version>1.0.0</version>
+   </dependency>
+```
 
 ## Support for testing spark jobs
 To test a spark job written in java (or scala) you have to run a java main class which contains the job definition. Usually you'll want to pass some arguments to it (spark application name, job parameters) to configure the job properly.
