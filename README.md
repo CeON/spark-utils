@@ -32,6 +32,14 @@ To test a spark job written in java (or scala) you have to run a java main class
 How can you write a test of a spark job by using *spark-utils*? Just see the example below:
 
 ```java
+    ...
+    import pl.edu.icm.sparkutils.test.SparkJob;
+    import pl.edu.icm.sparkutils.test.SparkJobBuilder;
+    import pl.edu.icm.sparkutils.test.SparkJobExecutor;
+    ...
+
+    private SparkJobExecutor executor = new SparkJobExecutor();
+
     @Test
     public void peopleClonerJob() throws IOException {
         
