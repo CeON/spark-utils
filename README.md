@@ -99,7 +99,7 @@ where:
 * *SomeAvroRecordClass* is a class generated from an avro [avdl](https://avro.apache.org/docs/1.7.5/idl.html) file
 
 #### Why using the standard hadoop API to read Avro files can be tricky
-To read an avro file you could also use a standard hadoop API:
+To read an avro file you could also use the standard hadoop API:
 
 ```java
 JavaPairRDD<AvroKey<T>, NullWritable> inputRecords = (JavaPairRDD<AvroKey<T>, NullWritable>) sc.newAPIHadoopFile(avroDatastorePath, AvroKeyInputFormat.class, avroRecordClass, NullWritable.class, job.getConfiguration());
