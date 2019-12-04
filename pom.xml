@@ -1,155 +1,116 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>pl.edu.icm.spark-utils</groupId>
-	<artifactId>spark-utils</artifactId>
-	<version>1.0.1-SNAPSHOT</version>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>pl.edu.icm.spark-utils</groupId>
+    <artifactId>spark-utils</artifactId>
+    <version>1.0.1-SNAPSHOT</version>
 
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
 
-	<licenses>
-		<license>
-			<name>The Apache Software License, Version 2.0</name>
-			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-		</license>
-	</licenses>
+    <scm>
+        <connection>scm:git:ssh://git@github.com/CeON/spark-utils.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com/CeON/spark-utils.git</developerConnection>
+        <url>https://github.com/CeON/spark-utils</url>
+        <tag>HEAD</tag>
+    </scm>
 
-	<scm>
-		<connection>scm:git:ssh://git@github.com/CeON/spark-utils.git</connection>
-		<developerConnection>scm:git:ssh://git@github.com/CeON/spark-utils.git</developerConnection>
-		<url>https://github.com/CeON/spark-utils</url>
-	  <tag>HEAD</tag>
-  </scm>
+    <distributionManagement>
+        <repository>
+            <id>ceon-commons-releases</id>
+            <url>http://maven.ceon.pl/artifactory/ceon-commons-releases</url>
+        </repository>
+        <snapshotRepository>
+            <id>ceon-commons-snapshots</id>
+            <url>http://maven.ceon.pl/artifactory/ceon-commons-snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
 
-        <distributionManagement>
-                <repository>
-                        <id>ceon-commons-releases</id>
-                        <url>http://maven.ceon.pl/artifactory/ceon-commons-releases</url>
-                </repository>
-                <snapshotRepository>
-                        <id>ceon-commons-snapshots</id>
-                        <url>http://maven.ceon.pl/artifactory/ceon-commons-snapshots</url>
-                </snapshotRepository>
-        </distributionManagement>
+    <repositories>
+        <repository>
+            <id>ceon</id>
+            <url>https://maven.ceon.pl/artifactory/repo/</url>
+        </repository>
+    </repositories>
 
-	<repositories>
-
-		<repository>
-			<id>ceon</id>
-			<url>https://maven.ceon.pl/artifactory/repo/</url>
-		</repository>
-
-	</repositories>
-
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <scala.binary.version>2.11</scala.binary.version>
+        <spark.version>2.4.0</spark.version>
+    </properties>
 
     <dependencies>
-        
-            <dependency>
-                <groupId>junit</groupId>
-                <artifactId>junit</artifactId>
-                <version>4.12</version>
-                <scope>test</scope>
-            </dependency>
-        
-            <dependency>
-                <groupId>org.mockito</groupId>
-                <artifactId>mockito-all</artifactId>
-                <version>1.10.19</version>
-                <scope>test</scope>
-            </dependency>
-        
-        
-           <dependency>
-                <groupId>org.apache.commons</groupId>
-                <artifactId>commons-lang3</artifactId>
-                <version>3.4</version>
-           </dependency>
-           
-           <dependency>
-                <groupId>com.google.guava</groupId>
-                <artifactId>guava</artifactId>
-                <version>18.0</version> 
-            </dependency>
-            
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-core</artifactId>
-                <version>4.2.3.RELEASE</version>
-            </dependency>
-            
-            <dependency>
-                <groupId>org.apache.spark</groupId>
-                <artifactId>spark-core_2.10</artifactId>
-                <version>1.5.2</version>
-            </dependency>
-            
-            <dependency>
-                <groupId>org.apache.spark</groupId>
-                <artifactId>spark-sql_2.10</artifactId>
-                <version>1.5.2</version>
-            </dependency>
-            
-             <dependency>
-                <groupId>org.apache.avro</groupId>
-                <artifactId>avro</artifactId>
-                <version>1.7.7</version>
-            </dependency>
-            
- 
-            
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <version>1.10.19</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>4.2.3.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-core_${scala.binary.version}</artifactId>
+            <version>${spark.version}</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
-    
-	<build>
 
-		<plugins>
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.3</version>
-				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
-					<encoding>${project.build.sourceEncoding}</encoding>
-				</configuration>
-			</plugin>
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<version>2.6</version>
-			</plugin>
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-source-plugin</artifactId>
-				<version>2.4</version>
-				<executions>
-					<execution>
-						<id>attach-sources</id>
-						<phase>verify</phase>
-						<goals>
-							<goal>jar-no-fork</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.2.0</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-release-plugin</artifactId>
                 <version>2.5.3</version>
             </plugin>
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.18.1</version>
-			</plugin>
-
-            <!-- Plugin that generates Java classes from Avro schemas -->
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.22.2</version>
+            </plugin>
+            <plugin>
+                <!-- Plugin that generates Java classes from Avro schemas -->
                 <groupId>org.apache.avro</groupId>
                 <artifactId>avro-maven-plugin</artifactId>
-                <version>1.7.4</version>
+                <version>1.7.7</version>
                 <executions>
                     <execution>
                         <phase>generate-test-sources</phase>
@@ -165,10 +126,10 @@
                     </execution>
                 </executions>
             </plugin>
-            
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>build-helper-maven-plugin</artifactId>
+                <version>3.0.0</version>
                 <executions>
                     <execution>
                         <id>add-source</id>
@@ -183,16 +144,107 @@
                         </configuration>
                     </execution>
                 </executions>
-             </plugin>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.2.0</version>
+                <configuration>
+                    <finalName>${project.artifactId}_${scala.binary.version}-${project.version}</finalName>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <id>copy-pom</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/${scala.binary.version}
+                            </outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${basedir}</directory>
+                                    <includes>
+                                        <include>pom.xml</include>
+                                    </includes>
+                                    <filtering>true</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>com.google.code.maven-replacer-plugin</groupId>
+                <artifactId>replacer</artifactId>
+                <version>1.5.3</version>
+                <executions>
+                    <execution>
+                        <id>replace-artifactid</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>replace</goal>
+                        </goals>
+                        <configuration>
+                            <file>target/${scala.binary.version}/pom.xml</file>
+                            <token>&lt;artifactId&gt;${project.artifactId}&lt;/artifactId&gt;</token>
+                            <value>&lt;artifactId&gt;${project.artifactId}_${scala.binary.version}&lt;/artifactId&gt;
+                            </value>
+                            <outputDir>target/${scala.binary.version}/replacer</outputDir>
+                            <outputFile>pom.xml</outputFile>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-install-plugin</artifactId>
+                <version>2.5.2</version>
+                <executions>
+                    <execution>
+                        <id>default-install</id>
+                        <configuration>
+                            <skip>true</skip>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>install-scala-version</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>install-file</goal>
+                        </goals>
+                        <configuration>
+                            <groupId>${project.groupId}</groupId>
+                            <artifactId>${project.artifactId}_${scala.binary.version}</artifactId>
+                            <version>${project.version}</version>
+                            <packaging>${project.packaging}</packaging>
+                            <file>${project.build.directory}/${project.artifactId}_${scala.binary.version}-${project.version}.jar</file>
+                            <pomFile>${project.build.directory}/${scala.binary.version}/replacer/pom.xml
+                            </pomFile>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
+    </build>
 
-	</build>
-
-
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-	</properties>
+    <profiles>
+        <profile>
+            <id>scala-2.10</id>
+            <properties>
+                <scala.binary.version>2.10</scala.binary.version>
+                <spark.version>1.5.2</spark.version>
+            </properties>
+        </profile>
+    </profiles>
 
 </project>
-
