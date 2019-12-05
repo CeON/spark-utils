@@ -19,10 +19,18 @@ The project is written in Java 8.
 ```xml
    <dependency>
        <groupId>pl.edu.icm.spark-utils</groupId>
-       <artifactId>spark-utils</artifactId>
-       <version>1.0.0</version>
+       <artifactId>spark-utils_2.10</artifactId>
+       <version>1.0.1</version>
    </dependency>
 ```
+```xml
+   <dependency>
+       <groupId>pl.edu.icm.spark-utils</groupId>
+       <artifactId>spark-utils_2.11</artifactId>
+       <version>1.0.1</version>
+   </dependency>
+```
+Remember to choose scala binary version matching your project's scala binary version.
 
 ## Support for testing spark jobs
 To test a spark job written in java (or scala) you have to run a java main class which contains the job definition. Usually you'll want to pass some arguments to it (spark application name, job parameters) to configure the job properly.
@@ -43,7 +51,6 @@ How can you write a test of a spark job by using *spark-utils*? Just see the exa
     @Test
     public void peopleClonerJob() throws IOException {
         
-        
         //------------------------ given -----------------------------
         
         // prepare some data and params
@@ -53,22 +60,16 @@ How can you write a test of a spark job by using *spark-utils*? Just see the exa
         // configure a job
         SparkJob sparkJob = SparkJobBuilder
                                            .create()
-                                           
                                            .setAppName("Spark People Cloner")
-        
                                            .setMainClass(SparkPeopleCloner.class) // main class with the job definition
-                                           
                                            .addArg("-inputPath", inputDirPath)
                                            .addArg("-outputPath", outputDirPath)
                                            .addArg("-numberOfCopies", "3")
-                                           
                                            .build();
-        
         
         //------------------------ execute -----------------------------
         
         executor.execute(sparkJob); // execute the job
-        
         
         //------------------------ assert -----------------------------
         
@@ -78,10 +79,7 @@ How can you write a test of a spark job by using *spark-utils*? Just see the exa
         // assert the result is ok
         assertEquals(15, people.size());
         assertEquals(3, people.stream().filter(p->p.getName().equals(new Utf8("Stieg Larsson"))).count());
-        
     }
-
-
 ```
 You may also be interested in seeing real production code that uses *spark-utils* to test spark jobs. Here is an example from [IIS](https://github.com/openaire/iis) project: [AffMatchingJobTest](https://github.com/openaire/iis/blob/cdh5/iis-wf/iis-wf-affmatching/src/test/java/eu/dnetlib/iis/wf/affmatching/AffMatchingJobTest.java)
 
@@ -111,8 +109,6 @@ To eliminate this phenomenon, one should clone each avro record after it has bee
 
 In addition, you get a simpler API that is easy to use.
 
-
-
 ### Writing avro files
 To write a spark JavaRDD to avro files, import [SparkAvroSaver](https://github.com/CeON/spark-utils/blob/master/src/main/java/pl/edu/icm/sparkutils/avro/SparkAvroSaver.java) and use its **saveJavaRDD** or **saveJavaPairRDDKeys**, for example:
 
@@ -124,7 +120,6 @@ sparkAvroSaver.saveJavaRDD(javaRDD, avroSchema, outputPath);
 where:
 * *avroSchema* is an avro schema of objects that will be saved
 * *outputPath* points to a place where the avro files will be saved
-
 
 ### Using avro in [Kryo](https://github.com/EsotericSoftware/kryo)
 
@@ -138,6 +133,3 @@ SparkConf conf = new SparkConf();
 conf.set("spark.serializer", "org.apache.spark.serializer.KryoSerializer");
 conf.set("spark.kryo.registrator", "pl.edu.icm.sparkutils.avro.AvroCompatibleKryoRegistrator");
 ...
-```
-
-
