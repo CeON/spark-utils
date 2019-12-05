@@ -22,6 +22,8 @@ The project is written in Java 8.
        <artifactId>spark-utils_2.10</artifactId>
        <version>1.0.1</version>
    </dependency>
+```
+```xml
    <dependency>
        <groupId>pl.edu.icm.spark-utils</groupId>
        <artifactId>spark-utils_2.11</artifactId>

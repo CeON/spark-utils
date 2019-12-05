@@ -196,8 +196,7 @@
                         <configuration>
                             <file>target/${scala.binary.version}/pom.xml</file>
                             <token>&lt;artifactId&gt;${project.artifactId}&lt;/artifactId&gt;</token>
-                            <value>&lt;artifactId&gt;${project.artifactId}_${scala.binary.version}&lt;/artifactId&gt;
-                            </value>
+                            <value>&lt;artifactId&gt;${project.artifactId}_${scala.binary.version}&lt;/artifactId&gt;</value>
                             <outputDir>target/${scala.binary.version}/replacer</outputDir>
                             <outputFile>pom.xml</outputFile>
                         </configuration>
@@ -228,8 +227,7 @@
                             <version>${project.version}</version>
                             <packaging>${project.packaging}</packaging>
                             <file>${project.build.directory}/${project.artifactId}_${scala.binary.version}-${project.version}.jar</file>
-                            <pomFile>${project.build.directory}/${scala.binary.version}/replacer/pom.xml
-                            </pomFile>
+                            <pomFile>${project.build.directory}/${scala.binary.version}/replacer/pom.xml</pomFile>
                         </configuration>
                     </execution>
                 </executions>
