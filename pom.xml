@@ -81,10 +81,14 @@
                     <encoding>${project.build.sourceEncoding}</encoding>
                 </configuration>
             </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
                 <version>3.2.0</version>
+                <configuration>
+                    <finalName>${project.artifactId}_${scala.binary.version}-${project.version}</finalName>
+                </configuration>
                 <executions>
                     <execution>
                         <id>attach-sources</id>
@@ -95,16 +99,19 @@
                     </execution>
                 </executions>
             </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-release-plugin</artifactId>
                 <version>2.5.3</version>
             </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.22.2</version>
             </plugin>
+
             <plugin>
                 <!-- Plugin that generates Java classes from Avro schemas -->
                 <groupId>org.apache.avro</groupId>
@@ -125,6 +132,7 @@
                     </execution>
                 </executions>
             </plugin>
+
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>build-helper-maven-plugin</artifactId>
@@ -181,6 +189,7 @@
                     </execution>
                 </executions>
             </plugin>
+
             <plugin>
                 <groupId>com.google.code.maven-replacer-plugin</groupId>
                 <artifactId>replacer</artifactId>
@@ -226,10 +235,20 @@
                             <version>${project.version}</version>
                             <packaging>${project.packaging}</packaging>
                             <file>${project.build.directory}/${project.artifactId}_${scala.binary.version}-${project.version}.jar</file>
+                            <sources>${project.build.directory}/${project.artifactId}_${scala.binary.version}-${project.version}-sources.jar</sources>
                             <pomFile>${project.build.directory}/${scala.binary.version}/replacer/pom.xml</pomFile>
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>2.8.2</version>
+                <configuration>
+                    <artifactId>${project.artifactId}_${scala.binary.version}</artifactId>
+                </configuration>
             </plugin>
         </plugins>
     </build>
