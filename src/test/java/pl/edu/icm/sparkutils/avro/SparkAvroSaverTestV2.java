@@ -73,6 +73,7 @@ public class SparkAvroSaverTestV2 {
         df
                 .write()
                 .format("avro")
+                .option("avroSchema", Country.SCHEMA$.toString())
                 .save(path.toString());
 
         // then
@@ -108,6 +109,7 @@ public class SparkAvroSaverTestV2 {
         df
                 .write()
                 .format("avro")
+                .option("avroSchema", Country.SCHEMA$.toString())
                 .save(path.toString());
 
         // then

@@ -71,6 +71,7 @@ public class SparkAvroLoaderTestV2 {
         // when
         List<Country> read = spark.read()
                 .format("avro")
+                .option("avroSchema", Country.SCHEMA$.toString())
                 .load(path.toString())
                 .map(rowToCountryFn(), Encoders.kryo(Country.class))
                 .collectAsList();
@@ -101,6 +102,7 @@ public class SparkAvroLoaderTestV2 {
         // when
         List<Country> read = spark.read()
                 .format("avro")
+                .option("avroSchema", Country.SCHEMA$.toString())
                 .load(path.toString())
                 .map(rowToCountryFn(), Encoders.kryo(Country.class))
                 .collectAsList();
