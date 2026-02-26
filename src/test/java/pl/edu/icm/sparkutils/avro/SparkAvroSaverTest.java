@@ -1,7 +1,7 @@
 package pl.edu.icm.sparkutils.avro;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Matchers.eq;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
 
@@ -17,10 +17,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
-import org.mockito.Matchers;
+import org.mockito.ArgumentMatchers;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import scala.Tuple2;
 
@@ -147,7 +147,7 @@ public class SparkAvroSaverTest {
         
         // given
         
-        doReturn(javaPairRDD).when(javaRDD).mapToPair(Matchers.any());
+        doReturn(javaPairRDD).when(javaRDD).mapToPair(ArgumentMatchers.any());
         
         
         // execute

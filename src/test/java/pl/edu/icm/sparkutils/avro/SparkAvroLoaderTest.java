@@ -2,12 +2,11 @@ package pl.edu.icm.sparkutils.avro;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.eq;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
-import static org.mockito.Mockito.verifyZeroInteractions;
 
 import org.apache.avro.mapred.AvroKey;
 import org.apache.avro.mapreduce.AvroKeyInputFormat;
@@ -22,7 +21,7 @@ import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import scala.Tuple2;
 
@@ -85,8 +84,7 @@ public class SparkAvroLoaderTest {
         verify(javaPairRDD).map(mapFunctionCaptor.capture());
         assertMapFunction(mapFunctionCaptor.getValue());
         
-        verifyNoMoreInteractions(sparkContext, javaPairRDD);
-        verifyZeroInteractions(javaRDD);
+        verifyNoMoreInteractions(sparkContext, javaPairRDD, javaRDD);
 
     }
     

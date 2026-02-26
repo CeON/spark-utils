@@ -7,7 +7,7 @@ import static org.mockito.Mockito.verifyNoMoreInteractions;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
-import org.mockito.internal.util.reflection.Whitebox;
+import java.lang.reflect.Field;
 
 /**
  * @author Łukasz Dumiszewski
@@ -22,10 +22,10 @@ public class SparkJobBuilderTest {
     
     
     @Before
-    public void before() {
-    
-        Whitebox.setInternalState(builder, "sparkJob", sparkJob);
-    
+    public void before() throws Exception {
+        Field field = SparkJobBuilder.class.getDeclaredField("sparkJob");
+        field.setAccessible(true);
+        field.set(builder, sparkJob);
     }
     
     
